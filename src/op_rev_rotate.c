@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   op_rev_rotate.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rxue <rxue@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/25 17:23:04 by rxue              #+#    #+#             */
+/*   Updated: 2025/03/25 17:23:07 by rxue             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static void	rev_rotate(t_stack_node **head)
@@ -28,7 +40,7 @@ void	rrb(t_stack_node **b, bool print)
 		ft_printf("rrb\n");
 }
 
-void	rrr(t_stack_node **a, bool print)
+void	rrr(t_stack_node **a, t_stack_node **b, bool print)
 {
 	rev_rotate(a);
 	rev_rotate(b);

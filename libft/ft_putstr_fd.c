@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_three.c                                       :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rxue <rxue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 17:23:47 by rxue              #+#    #+#             */
-/*   Updated: 2025/03/25 17:23:49 by rxue             ###   ########.fr       */
+/*   Created: 2024/11/26 14:59:48 by rxue              #+#    #+#             */
+/*   Updated: 2024/11/26 16:46:47 by rxue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	sort_three(t_stack_node **a)
+void	ft_putstr_fd(char *s, int fd)
 {
-	t_stack_node	*biggest_node;
-
-	biggest_node = find_max(*a);
-	if (biggest_node == *a)
-		ra(a, false);
-	else if (biggest_node == (*a)->next)
-		rra(a, false);
-	if ((*a)->nbr > (*a)->next->nbr)
-		sa(a, false);
+	if (!s)
+		return ;
+	if (fd >= 0)
+		write(fd, s, ft_strlen(s));
 }

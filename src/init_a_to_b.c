@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_a_to_b.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rxue <rxue@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/25 17:24:29 by rxue              #+#    #+#             */
+/*   Updated: 2025/03/25 17:24:32 by rxue             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	current_index(t_stack_node *stack)
@@ -21,78 +33,57 @@ void	current_index(t_stack_node *stack)
 	}
 }
 
-static void	set_target_a(t_stack_node *a, t_stack_node *b)
+static void	sort_node_array(t_stack_node *node_array[], int len)
 {
-	t_stack_node	*current_b;
-	t_stack_node	*target_node;
-	long			best_match_index;
+	int				i;
+	int				j;
+	t_stack_node	*tmp;
 
-	while (a)
+	i = 0;
+	while (i < len - 1)
 	{
-		best_match_index = LONG_MIN;
-		current_b = b;
-		while (current_b)
+		j = 0;
+		while (j < len - 1 - i)
 		{
-			if (current_b->nbr < a->nbr && current_b->nbr > best_match_index)
+			if (node_array[j]->nbr > node_array[j + 1]->nbr)
 			{
-				best_match_index = current_b->nbr;
-				target_node = current_b;
+				tmp = node_array[j];
+				node_array[j] = node_array[j + 1];
+				node_array[j + 1] = tmp;
 			}
-			current_b = current_b->next;
+			j++;
 		}
-		if (best_match_index == LONG_MIN)
-			a->target_node = find_max(b);
-		else
-			a->target_node = target_node;
-		a = a->next;
+		i++;
 	}
 }
 
-static void	cost_analysis_a(t_stack_node *a, t_stack_node *b)
+static void	value_index(t_stack_node *head)
 {
-	int	len_a;
-	int	len_b;
+	t_stack_node	**node_array;
+	t_stack_node	*tmp;
+	int				i;
+	int				len;
 
-	len_a = stack_len(a);
-	len_b = stack_len(b);
-	while (a)
-	{
-		a->push_cost = a->index;
-		if (!(a->above_median))
-			a->push_cost = len_a - a->index;
-		if (a->target_node->above_median)
-			a->push_cost += a->target_node->index;
-		else
-			a->push_cost += len_b - a->target_node->index;
-		a = a->next;
-	}
-}
-
-void	set_cheapest(t_stack_node *stack)
-{
-	long			cheapest_value;
-	t_stack_node	*cheapest_node;
-
-	if (!stack)
+	len = stack_len(head);
+	node_array = (t_stack_node **)malloc(len * sizeof (t_stack_node *));
+	if (!node_array)
 		return ;
-	cheapest_value = LONG_MAX;
-	while (stack)
+	tmp = head;
+	i = 0;
+	while (i < len)
+		node_array[i++] = tmp;
+	sort_node_array(node_array, len);
+	i = 0;
+	while (i < len)
 	{
-		if (stack->push_cost < cheapest_value)
-		{
-			cheapest_value = stack->push_cost;
-			cheapest_node = stack;
-		}
-		stack = stack->next;
+		node_array[i]->nbr_index = i;
+		i++;
 	}
-	cheapest_node->cheapest = true;
+	free(node_array);
 }
 
-void	init_nodes_a(t_stack_node *a, t_stack_node *b)
+void	init_nodes_a(t_stack_node *a)
 {
 	current_index(a);
-	current_index(b);
-	set_target_a(a, b);
-	cost_analysis_a(a, b);
-	set_cheapest(a);
+	value_index(a);
 }

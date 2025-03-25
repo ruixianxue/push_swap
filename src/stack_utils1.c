@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack_utils1.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rxue <rxue@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/25 17:24:07 by rxue              #+#    #+#             */
+/*   Updated: 2025/03/25 17:24:09 by rxue             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	check_sorted(t_stack_node *stack)
@@ -39,7 +51,7 @@ t_stack_node	*find_max(t_stack_node *stack)
 	t_stack_node	*max_node;
 
 	if (!stack)
-		return ;
+		return (NULL);
 	max = LONG_MIN;
 	while (stack)
 	{
@@ -59,7 +71,7 @@ t_stack_node	*find_min(t_stack_node *stack)
 	t_stack_node	*min_node;
 
 	if (!stack)
-		return ;
+		return (NULL);
 	min = LONG_MAX;
 	while (stack)
 	{

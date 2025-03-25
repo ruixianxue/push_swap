@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_three.c                                       :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rxue <rxue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 17:23:47 by rxue              #+#    #+#             */
-/*   Updated: 2025/03/25 17:23:49 by rxue             ###   ########.fr       */
+/*   Created: 2024/11/13 18:07:48 by rxue              #+#    #+#             */
+/*   Updated: 2024/11/13 18:11:13 by rxue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	sort_three(t_stack_node **a)
+int	ft_tolower(int c)
 {
-	t_stack_node	*biggest_node;
-
-	biggest_node = find_max(*a);
-	if (biggest_node == *a)
-		ra(a, false);
-	else if (biggest_node == (*a)->next)
-		rra(a, false);
-	if ((*a)->nbr > (*a)->next->nbr)
-		sa(a, false);
+	if (c >= 'A' && c <= 'Z')
+		c = c - 'A' + 'a';
+	return (c);
 }
+/*
+int	main(void)
+{
+	printf("%c", ft_tolower('A'));
+	return (0);
+}*/

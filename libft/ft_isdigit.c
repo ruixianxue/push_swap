@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_three.c                                       :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rxue <rxue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 17:23:47 by rxue              #+#    #+#             */
-/*   Updated: 2025/03/25 17:23:49 by rxue             ###   ########.fr       */
+/*   Created: 2024/11/06 15:16:24 by rxue              #+#    #+#             */
+/*   Updated: 2024/11/06 16:06:24 by rxue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-void	sort_three(t_stack_node **a)
+int	ft_isdigit(int c)
 {
-	t_stack_node	*biggest_node;
-
-	biggest_node = find_max(*a);
-	if (biggest_node == *a)
-		ra(a, false);
-	else if (biggest_node == (*a)->next)
-		rra(a, false);
-	if ((*a)->nbr > (*a)->next->nbr)
-		sa(a, false);
+	if (c >= '0' && c <= '9')
+		return (1);
+	else
+		return (0);
 }
+/*
+#include <stdio.h>
+int main(void)
+{
+	char	c;
+
+	c = 'c';
+	if (ft_isdigit(c) == 0)
+		printf("%c is not a digit.\n", c);
+	else
+		printf("%c is a digit.\n", c);
+	return (0);
+}*/

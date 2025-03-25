@@ -1,50 +1,60 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_stack.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rxue <rxue@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/25 17:23:38 by rxue              #+#    #+#             */
+/*   Updated: 2025/03/25 17:30:25 by rxue             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-static void	rotate_both(t_stack_node **a, t_stack_node **b, t_stack_node *cheapest_node)
+static void	rotate_both(t_stack_node **a, t_stack_node **b, \
+							t_stack_node *cheapest_node)
 {
-	while (*b != cheapest_node->target && *a != cheapest_node)
+	while (*b != cheapest_node->target_node && *a != cheapest_node)
 		rr(a, b, false);
 	current_index(*a);
 	current_index(*b);
 }
 
-static void	rev_rotate_both(t_stack_node **a, t_stack_node **b, t_stack_node *cheapest_node)
+static void	rev_rotate_both(t_stack_node **a, t_stack_node **b, \
+							t_stack_node *cheapest_node)
 {
-	while (*b != cheapest_node->target && *a != cheapest_node)
+	while (*b != cheapest_node->target_node && *a != cheapest_node)
 		rrr(a, b, false);
 	current_index(*a);
 	current_index(*b);
 }
 
-static	void	move_a_to_b(t_stack_node **a, t_stack_node **b)
+static void	move_a_to_b(t_stack_node **a, t_stack_node **b)
 {
-	t_stack_node	*cheapest_node;
+	int	len;
 
-	cheapest_node = get_cheapest(*a);
-	if (cheapest_node->above_median && cheapest_node->target_node->above_median)
-		rotate_both(a, b, cheapest_node);
-	else if (!(cheapest_node->above_median) && !(cheapest_node->target_node->above_median))
-		rev_rotate_both(a, b, cheapest_node);
-	prep_for_push(a, cheapest_node, 'a');
-	prep_for_push(b, cheapest_node->target_node, 'b');
-	pb(b, a, false);
+	len = stack_len(*a);
+	if ((*a)->nbr_index > len / 2)
+		pa(a, b, false);
+	else
+		ra(a, false);
 }
 
 static void	move_b_to_a(t_stack_node **a, t_stack_node **b)
 {
-	prep_for_push(a, (*b)->target_node, 'a');
-	pa(a, b, false);
-}
+	t_stack_node	*cheapest_node;
 
-static void	min_on_top(t_stack_node **a)
-{
-	while ((*a)->nbr != find_min(*a)->nbr)
-	{
-		if (find_min(*a)->above_median)
-			ra(a, false);
-		else
-			rra(a, false);
-	}
+	cheapest_node = get_cheapest(*b);
+	if (cheapest_node->above_median && \
+			cheapest_node->target_node->above_median)
+		rotate_both(a, b, cheapest_node);
+	else if (!(cheapest_node->above_median) && \
+				!(cheapest_node->target_node->above_median))
+		rev_rotate_both(a, b, cheapest_node);
+	prep_for_push(a, cheapest_node->target_node, 'a');
+	prep_for_push(b, cheapest_node, 'b');
+	pa(a, b, false);
 }
 
 void	sort_stack(t_stack_node **a, t_stack_node **b)
@@ -52,13 +62,9 @@ void	sort_stack(t_stack_node **a, t_stack_node **b)
 	int	len_a;
 
 	len_a = stack_len(*a);
-	if (len_a-- > 3 && !stack_sorted(*a))
-		pb(b, a, false);
-	if (len_a-- > 3 && !stack_sorted(*a))
-		pb(b, a, false);
-	while (len_a-- > 3 && !stack_sorted(*a))
+	while (len_a-- > 3 && !check_sorted(*a))
 	{
-		init_nodes_a(*a, *b);
+		init_nodes_a(*a);
 		move_a_to_b(a, b);
 	}
 	sort_three(a);

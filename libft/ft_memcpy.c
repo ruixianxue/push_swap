@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_three.c                                       :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rxue <rxue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 17:23:47 by rxue              #+#    #+#             */
-/*   Updated: 2025/03/25 17:23:49 by rxue             ###   ########.fr       */
+/*   Created: 2024/11/12 16:39:30 by rxue              #+#    #+#             */
+/*   Updated: 2024/11/26 15:52:44 by rxue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	sort_three(t_stack_node **a)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	t_stack_node	*biggest_node;
+	size_t	i;
 
-	biggest_node = find_max(*a);
-	if (biggest_node == *a)
-		ra(a, false);
-	else if (biggest_node == (*a)->next)
-		rra(a, false);
-	if ((*a)->nbr > (*a)->next->nbr)
-		sa(a, false);
+	i = 0;
+	if ((!dest) && (!src))
+		return (NULL);
+	while (i < n)
+	{
+		((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
+		i++;
+	}
+	return (dest);
 }
+/*
+int	main(void)
+{
+	char	dest[120] = "happyhalloween";
+	const char	src[] = "hello";
+	ft_memcpy(dest, src, 3);
+	puts(dest);
+	return (0);
+}*/

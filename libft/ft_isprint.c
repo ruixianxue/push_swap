@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_three.c                                       :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rxue <rxue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 17:23:47 by rxue              #+#    #+#             */
-/*   Updated: 2025/03/25 17:23:49 by rxue             ###   ########.fr       */
+/*   Created: 2024/11/06 16:34:00 by rxue              #+#    #+#             */
+/*   Updated: 2024/11/06 16:44:14 by rxue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-void	sort_three(t_stack_node **a)
+int	ft_isprint(int c)
 {
-	t_stack_node	*biggest_node;
-
-	biggest_node = find_max(*a);
-	if (biggest_node == *a)
-		ra(a, false);
-	else if (biggest_node == (*a)->next)
-		rra(a, false);
-	if ((*a)->nbr > (*a)->next->nbr)
-		sa(a, false);
+	if (c >= 32 && c <= 126)
+		return (1);
+	else
+		return (0);
 }
+/*
+#include <stdio.h>
+
+int	main(void)
+{
+	char	c;
+
+	c = 2;
+	if (ft_isprint(c) == 0)
+		printf("%c is not printable.\n", c);
+	else
+		printf("%c is printable.\n", c);
+	return (0);
+}*/

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack_utils2.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rxue <rxue@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/25 17:24:17 by rxue              #+#    #+#             */
+/*   Updated: 2025/03/25 17:30:02 by rxue             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 t_stack_node	*get_cheapest(t_stack_node *stack)
@@ -31,5 +43,16 @@ void	prep_for_push(t_stack_node **stack, t_stack_node *head, char stack_name)
 			else
 				rrb(stack, false);
 		}
+	}
+}
+
+void	min_on_top(t_stack_node **a)
+{
+	while ((*a)->nbr != find_min(*a)->nbr)
+	{
+		if (find_min(*a)->above_median)
+			ra(a, false);
+		else
+			rra(a, false);
 	}
 }

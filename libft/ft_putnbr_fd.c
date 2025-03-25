@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_three.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rxue <rxue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 17:23:47 by rxue              #+#    #+#             */
-/*   Updated: 2025/03/25 17:23:49 by rxue             ###   ########.fr       */
+/*   Created: 2024/11/26 15:10:19 by rxue              #+#    #+#             */
+/*   Updated: 2024/11/26 16:53:12 by rxue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	sort_three(t_stack_node **a)
+void	ft_putnbr_fd(int n, int fd)
 {
-	t_stack_node	*biggest_node;
+	long	nbr;
 
-	biggest_node = find_max(*a);
-	if (biggest_node == *a)
-		ra(a, false);
-	else if (biggest_node == (*a)->next)
-		rra(a, false);
-	if ((*a)->nbr > (*a)->next->nbr)
-		sa(a, false);
+	nbr = n;
+	if (fd >= 0)
+	{
+		if (nbr < 0)
+		{
+			nbr *= -1;
+			ft_putchar_fd('-', fd);
+		}
+		if (nbr > 9)
+		{
+			ft_putnbr_fd((nbr / 10), fd);
+			ft_putnbr_fd((nbr % 10), fd);
+		}
+		else
+			ft_putchar_fd(nbr + '0', fd);
+	}
 }

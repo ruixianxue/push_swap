@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack_init.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rxue <rxue@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/25 17:23:57 by rxue              #+#    #+#             */
+/*   Updated: 2025/03/25 17:28:04 by rxue             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static long	ft_atol(const char *s)
@@ -17,7 +29,7 @@ static long	ft_atol(const char *s)
 	}
 	while (ft_isdigit(*s))
 		result = result * 10 + (*s++ - '0');
-	if ((result * sign) > INT_MAX || (result * sign < INT_MIN))
+	if ((result * sign) > INT_MAX || (result * sign) < INT_MIN)
 		ft_error();
 	return (result * sign);
 }
@@ -35,7 +47,6 @@ static void	append_node(t_stack_node **stack, int n)
 	node->next = NULL;
 	node->nbr = n;
 	node->cheapest = 0;
-
 	if (!(*stack))
 	{
 		*stack = node;
@@ -52,7 +63,7 @@ static void	append_node(t_stack_node **stack, int n)
 t_stack_node	*sub_process_av(char **argv)
 {
 	t_stack_node	*a;
-	char 			**tmp;
+	char			**tmp;
 	int				i;
 	int				n;
 
@@ -67,9 +78,12 @@ t_stack_node	*sub_process_av(char **argv)
 			ft_error();
 		}	
 		n = ft_atol(tmp[i]);
-		append_node(a, (int)n)
+		append_node(&a, (int)n);
 		i++;
 	}
+	while (i >= 0)
+		free(tmp[i--]);
+	free(tmp);
 	return (a);
 }
 
@@ -82,20 +96,21 @@ t_stack_node	*process_av(int argc, char **argv)
 	i = 1;
 	a = NULL;
 	if (argc < 2)
-		ft_error();
-	else if (argc == 2)
+		exit(0);
+	if (argc == 2)
 		a = sub_process_av(argv);
 	else
 	{
 		while (i < argc)
 		{
-			if (error_syntax(tmp[i]))
+			if (error_syntax(argv[i]))
 			{
 				ft_free(&a);
 				ft_error();
 			}
 			n = ft_atol(argv[i]);
-			append_node(a, (int)n);
+			append_node(&a, (int)n);
+			i++;
 		}
 	}
 	return (a);

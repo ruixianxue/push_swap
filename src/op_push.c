@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   op_push.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rxue <rxue@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/25 17:22:54 by rxue              #+#    #+#             */
+/*   Updated: 2025/03/25 17:22:55 by rxue             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-static void	push(t_stack_node **dst, t_stack_node **src);
+static void	push(t_stack_node **dst, t_stack_node **src)
 {
 	t_stack_node	*push_node;
 
