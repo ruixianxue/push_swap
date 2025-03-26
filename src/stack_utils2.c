@@ -61,7 +61,7 @@ void	print_stack(t_stack_node *stack)
 {
 	while (stack)
 	{
-		printf("%d\n", stack->nbr);
+		printf("%d\n", stack->nbr_index);
 		stack = stack->next;
 	}
 }

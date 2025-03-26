@@ -57,7 +57,7 @@ static void	sort_node_array(t_stack_node *node_array[], int len)
 	}
 }
 
-static void	value_index(t_stack_node *head)
+void	value_index(t_stack_node *head)
 {
 	t_stack_node	**node_array;
 	t_stack_node	*tmp;
@@ -71,7 +71,10 @@ static void	value_index(t_stack_node *head)
 	tmp = head;
 	i = 0;
 	while (i < len)
+	{
 		node_array[i++] = tmp;
+		tmp = tmp->next;
+	}
 	sort_node_array(node_array, len);
 	i = 0;
 	while (i < len)

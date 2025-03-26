@@ -59,6 +59,7 @@ t_stack_node	*find_max(t_stack_node *stack);
 t_stack_node	*find_min(t_stack_node *stack);
 void			min_on_top(t_stack_node **a);
 void			print_stack(t_stack_node *stack);
+void			value_index(t_stack_node *head);
 
 //Commands
 void			pa(t_stack_node **a, t_stack_node **b, bool print);
