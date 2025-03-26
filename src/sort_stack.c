@@ -15,7 +15,7 @@
 static void	rotate_both(t_stack_node **a, t_stack_node **b, \
 							t_stack_node *cheapest_node)
 {
-	while (*b != cheapest_node->target_node && *a != cheapest_node)
+	while (*a != cheapest_node->target_node && *b != cheapest_node)
 		rr(a, b, false);
 	current_index(*a);
 	current_index(*b);
@@ -24,7 +24,7 @@ static void	rotate_both(t_stack_node **a, t_stack_node **b, \
 static void	rev_rotate_both(t_stack_node **a, t_stack_node **b, \
 							t_stack_node *cheapest_node)
 {
-	while (*b != cheapest_node->target_node && *a != cheapest_node)
+	while (*a != cheapest_node->target_node && *b != cheapest_node)
 		rrr(a, b, false);
 	current_index(*a);
 	current_index(*b);
@@ -36,7 +36,7 @@ static void	move_a_to_b(t_stack_node **a, t_stack_node **b)
 
 	len = stack_len(*a);
 	if ((*a)->nbr_index > len / 2)
-		pa(a, b, false);
+		pb(b, a, false);
 	else
 		ra(a, false);
 }

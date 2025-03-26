@@ -46,4 +46,28 @@ fclean: clean
 
 re: fclean all
 
+test100: $(NAME)
+	$(eval ARG = $(shell seq -5000 5000 | shuf | head -n 100))
+	./push_swap $(ARG) | ./checker_linux $(ARG)
+	@echo -n "number of operations : "
+	@./push_swap $(ARG) | wc -l
+
+test3: $(NAME)
+	$(eval ARG = $(shell seq -5000 5000 | shuf | head -n 3))
+	./push_swap $(ARG) | ./checker_linux $(ARG)
+	@echo -n "number of operations : "
+	@./push_swap $(ARG) | wc -l
+
+test5: $(NAME)
+	$(eval ARG = $(shell seq -5000 5000 | shuf | head -n 5))
+	./push_swap $(ARG) | ./checker_linux $(ARG)
+	@echo -n "number of operations : "
+	@./push_swap $(ARG) | wc -l
+
+test500: $(NAME)
+	$(eval ARG = $(shell seq -5000 5000 | shuf | head -n 500))
+	./push_swap $(ARG) | ./checker_linux $(ARG)
+	@echo -n "number of operations : "
+	@./push_swap $(ARG) | wc -l
+	
 .PHONY: all clean fclean re

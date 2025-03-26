@@ -15,6 +15,7 @@
 
 # include <stdbool.h>
 # include <limits.h>
+# include <stdio.h>
 # include "../libft/inc/ft_printf.h"
 # include "../libft/inc/libft.h"
 
@@ -57,6 +58,7 @@ t_stack_node	*find_last(t_stack_node *stack);
 t_stack_node	*find_max(t_stack_node *stack);
 t_stack_node	*find_min(t_stack_node *stack);
 void			min_on_top(t_stack_node **a);
+void			print_stack(t_stack_node *stack);
 
 //Commands
 void			pa(t_stack_node **a, t_stack_node **b, bool print);

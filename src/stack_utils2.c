@@ -56,3 +56,12 @@ void	min_on_top(t_stack_node **a)
 			rra(a, false);
 	}
 }
+
+void	print_stack(t_stack_node *stack)
+{
+	while (stack)
+	{
+		printf("%d\n", stack->nbr);
+		stack = stack->next;
+	}
+}
