@@ -16,7 +16,7 @@ static void	rotate_both(t_stack_node **a, t_stack_node **b, \
 							t_stack_node *cheapest_node)
 {
 	while (*a != cheapest_node->target_node && *b != cheapest_node)
-		rr(a, b, false);
+		rr(a, b);
 	current_index(*a);
 	current_index(*b);
 }
@@ -25,7 +25,7 @@ static void	rev_rotate_both(t_stack_node **a, t_stack_node **b, \
 							t_stack_node *cheapest_node)
 {
 	while (*a != cheapest_node->target_node && *b != cheapest_node)
-		rrr(a, b, false);
+		rrr(a, b);
 	current_index(*a);
 	current_index(*b);
 }
@@ -36,9 +36,9 @@ static void	move_a_to_b(t_stack_node **a, t_stack_node **b, int size)
 
 	len = stack_len(*a);
 	if ((*a)->nbr_index >= size / 2 || len <= size / 2)
-		pb(b, a, false);
+		pb(b, a);
 	else
-		ra(a, false);
+		ra(a);
 }
 
 static void	move_b_to_a(t_stack_node **a, t_stack_node **b)
@@ -54,7 +54,7 @@ static void	move_b_to_a(t_stack_node **a, t_stack_node **b)
 		rev_rotate_both(a, b, cheapest_node);
 	prep_for_push(a, cheapest_node->target_node, 'a');
 	prep_for_push(b, cheapest_node, 'b');
-	pa(a, b, false);
+	pa(a, b);
 }
 
 void	sort_stack(t_stack_node **a, t_stack_node **b)
@@ -64,9 +64,7 @@ void	sort_stack(t_stack_node **a, t_stack_node **b)
 	size = stack_len(*a);
 	init_nodes_a(*a);
 	while (stack_len(*a) > 3 && !check_sorted(*a))
-	{
 		move_a_to_b(a, b, size);
-	}
 	sort_three(a);
 	while (*b)
 	{

@@ -61,8 +61,9 @@ void	ft_free(t_stack_node **stack)
 	}
 }
 
-void	ft_error(void)
+void	ft_error(t_stack_node **stack)
 {
+	ft_free(stack);
 	write(2, "Error\n", 6);
 	exit(1);
 }

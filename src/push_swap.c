@@ -20,14 +20,11 @@ int	main(int argc, char **argv)
 	b = NULL;
 	a = process_av(argc, argv);
 	if (!a || error_duplicate(a))
-	{
-		ft_free(&a);
-		ft_error();
-	}
+		ft_error(&a);
 	if (!check_sorted(a))
 	{
 		if (stack_len(a) == 2)
-			sa(&a, false);
+			sa(&a);
 		else if (stack_len(a) == 3)
 			sort_three(&a);
 		else

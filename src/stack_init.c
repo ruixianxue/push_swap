@@ -6,7 +6,7 @@
 /*   By: rxue <rxue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:23:57 by rxue              #+#    #+#             */
-/*   Updated: 2025/03/25 17:28:04 by rxue             ###   ########.fr       */
+/*   Updated: 2025/03/27 12:56:08 by rxue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ static long	ft_atol(const char *s)
 	}
 	while (ft_isdigit(*s))
 		result = result * 10 + (*s++ - '0');
-	if ((result * sign) > INT_MAX || (result * sign) < INT_MIN)
-		ft_error();
 	return (result * sign);
 }
 
@@ -60,58 +58,65 @@ static void	append_node(t_stack_node **stack, int n)
 	}
 }
 
-t_stack_node	*sub_process_av(char **argv)
+static void	free_tmp(char **tmp)
 {
-	t_stack_node	*a;
+	int	i;
+
+	i = 0;
+	while (tmp[i])
+		free(tmp[i++]);
+	free(tmp);
+}
+
+void	sub_process_av(char *str, t_stack_node **a)
+{
 	char			**tmp;
 	int				i;
-	int				n;
+	long			n;
 
-	a = NULL;
 	i = 0;
-	tmp = ft_split(argv[1], ' ');
+	tmp = ft_split(str, ' ');
+	if (!tmp |!tmp[0])
+	{
+		free_tmp(tmp);
+		ft_error(a);
+	}
 	while (tmp[i])
 	{
-		if (error_syntax(tmp[i]))
-		{
-			ft_free(&a);
-			ft_error();
-		}	
 		n = ft_atol(tmp[i]);
-		append_node(&a, (int)n);
+		if (error_syntax(tmp[i]) || n > INT_MAX || n < INT_MIN)
+		{
+			free_tmp(tmp);
+			ft_error(a);
+		}
+		append_node(a, (int)n);
 		i++;
 	}
-	while (i >= 0)
-		free(tmp[i--]);
-	free(tmp);
-	return (a);
+	free_tmp(tmp);
 }
 
 t_stack_node	*process_av(int argc, char **argv)
 {
 	t_stack_node	*a;
 	int				i;
-	int				n;
+	long			n;
 
 	i = 1;
 	a = NULL;
 	if (argc < 2)
 		exit(0);
-	if (argc == 2)
-		a = sub_process_av(argv);
-	else
+	while (i < argc)
 	{
-		while (i < argc)
+		if (find_space(argv[i]))
+			sub_process_av(argv[i], &a);
+		else
 		{
-			if (error_syntax(argv[i]))
-			{
-				ft_free(&a);
-				ft_error();
-			}
 			n = ft_atol(argv[i]);
+			if (error_syntax(argv[i]) || n > INT_MAX || n < INT_MIN)
+				ft_error(&a);
 			append_node(&a, (int)n);
-			i++;
 		}
+		i++;
 	}
 	return (a);
 }
